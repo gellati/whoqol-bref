@@ -302,6 +302,23 @@ function results(){
 				case "Q8": D4.values.push(radios[i].value); break;
 				case "Q9": D4.values.push(radios[i].value); break;
 				case "Q10": D1.values.push(radios[i].value); break;
+				case "Q11": D2.values.push(radios[i].value); break;
+				case "Q12": D4.values.push(radios[i].value); break;
+				case "Q13": D4.values.push(radios[i].value); break;
+				case "Q14": D4.values.push(radios[i].value); break;
+				case "Q15": D1.values.push(radios[i].value); break;
+				case "Q16": D1.values.push(radios[i].value); break;
+				case "Q17": D1.values.push(radios[i].value); break;
+				case "Q18": D1.values.push(radios[i].value); break;
+				case "Q19": D2.values.push(radios[i].value); break;
+				case "Q20": D3.values.push(radios[i].value); break;
+				case "Q21": D3.values.push(radios[i].value); break;
+				case "Q22": D3.values.push(radios[i].value); break;
+				case "Q23": D4.values.push(radios[i].value); break;
+				case "Q24": D4.values.push(radios[i].value); break;
+				case "Q25": D4.values.push(radios[i].value); break;
+				case "Q26": D2.values.push(radios[i].value); break;
+
 			}
 
 
