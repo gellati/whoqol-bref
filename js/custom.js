@@ -199,6 +199,14 @@ $('#siteNav').affix({
 	}
 })
 
+
+var D1 = {values: [], mean: "", domainString: "physical"}
+var D2 = {values: [], mean: "", domainString: "psychological"}
+var D3 = {values: [], mean: "", domainString: "social"}
+var D4 = {values: [], mean: "", domainString: "environment"}
+
+
+
 //var questionnaireElement = document.getElementById('questionnaire')
 
 var questionnaireField = document.createElement("div");
@@ -217,9 +225,46 @@ for(var i = 0; i < questionnaire.length; i++){
 	question.appendChild(radioButtons)
 
 	questionnaireField.appendChild(question)
+
 }
 
 $('#questionnaire').append(questionnaireField)
+
+var results = document.createElement("div");
+var domains = ["physical", "psychological", "social", "environment"]
+
+for(var i = 0; i < 4; i++){
+	switch(i){
+		case 0:
+			var domainResult = document.createElement("div")
+			domainResult.className="domain-result"+ " " + D1.domainString
+			domainResult.innerHTML = "" //domains[i] //+ " " + D1.mean.toString()
+			results.appendChild(domainResult);
+			break;
+		case 1:
+			var domainResult = document.createElement("div")
+			domainResult.className="domain-result"+ " " + D2.domainString
+			domainResult.innerHTML = "" // domains[i] + " " + D2.mean.toString()
+			results.appendChild(domainResult);
+			break;
+		case 2:
+			var domainResult = document.createElement("div")
+			domainResult.className="domain-result"+ " " + D3.domainString
+			domainResult.innerHTML = "" // domains[i] + " " + D3.mean.toString()
+			results.appendChild(domainResult);
+			break;
+		case 3:
+			var domainResult = document.createElement("div")
+			domainResult.className="domain-result"+ " " + D4.domainString
+			domainResult.innerHTML = "" //domains[i] + " " + D4.mean.toString()
+			results.appendChild(domainResult);
+			break;
+	}
+}
+
+$('#results-area').append(results)
+
+
 
 function questionRadioButtons(nr, name, domain){
 	var radioButtonField=document.createElement("div")
@@ -239,7 +284,7 @@ function questionRadioButtons(nr, name, domain){
 }
 
 
-function results(){
+function calculateResults(){
 /*
 	var res = {
 		D1: {
@@ -260,11 +305,6 @@ function results(){
 		}
 	}
 	*/
-
-	var D1 = {values: [], mean: "", domainString: "physical"}
-	var D2 = {values: [], mean: "", domainString: "psychological"}
-	var D3 = {values: [], mean: "", domainString: "social"}
-	var D4 = {values: [], mean: "", domainString: "environment"}
 
 
 
@@ -320,8 +360,6 @@ function results(){
 				case "Q26": D2.values.push(radios[i].value); break;
 
 			}
-
-
 		}
 
 
@@ -341,47 +379,23 @@ D1.values.push(radios[i].value);
 	D3.mean = Math.round( ((D3.values.reduce(add, 0) * 4 ) / D3.values.length) * 100) / 100;
 	D4.mean = Math.round( ((D4.values.reduce(add, 0) * 4 ) / D4.values.length) * 100) / 100;
 
-	var results = document.createElement("div");
-	var domains = ["Physical", "Psychological", "Social", "Environment"]
-
-	for(var i = 0; i < 4; i++){
-		switch(i){
-			case 0:
-			  var domainResult = document.createElement("div")
-  			domainResult.className="domain-result"+ " " + D1.domainString
-	  		domainResult.innerHTML = domains[i] + " " + D1.mean.toString()
-				results.appendChild(domainResult);
-				break;
-			case 1:
-			  var domainResult = document.createElement("div")
-  			domainResult.className="domain-result"+ " " + D2.domainString
-	  		domainResult.innerHTML = domains[i] + " " + D2.mean.toString()
-				results.appendChild(domainResult);
-				break;
-			case 2:
-			  var domainResult = document.createElement("div")
-  			domainResult.className="domain-result"+ " " + D3.domainString
-	  		domainResult.innerHTML = domains[i] + " " + D3.mean.toString()
-				results.appendChild(domainResult);
-				break;
-			case 3:
-			  var domainResult = document.createElement("div")
-  			domainResult.className="domain-result"+ " " + D4.domainString
-	  		domainResult.innerHTML = domains[i] + " " + D4.mean.toString()
-				results.appendChild(domainResult);
-				break;
-		}
-
-	}
+	$(".domain-result.physical").empty().append(domains[0] + " " + D1.mean.toString())
+	$(".domain-result.psychological").html(domains[1] + " " + D2.mean.toString())
+	$(".domain-result.social").html(domains[2] + " " + D3.mean.toString())
+	$(".domain-result.environment").html(domains[3] + " " + D4.mean.toString())
 
 
 
 
-	$('#results-area').append(results)
+}
+
+
+
+
 
 	console.log(D1)
 ///	console.log(res.D1)
-}
+
 
 function add(a, b){
 	return parseInt(a) + parseInt(b);
